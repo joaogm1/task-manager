@@ -1,0 +1,56 @@
+<form>
+  <div class="form-group form-inline">
+    Pesquise
+    <input class="form-control ml-2" type="text" [formControl]="filter" />
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Nota</th>
+      <th scope="col">Concluida</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Fim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tarefa of tarefas$ | async; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+
+      <td>
+        <ngb-highlight
+          [result]="tarefa.nome"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight
+          [result]="tarefa.nota | number"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+          [result]="tarefa.concluido"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight
+          [result]="tarefa.dataInicio | date"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight
+          [result]="tarefa.dataFinal | date"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+    </tr>
+  </tbody>
+</table>
